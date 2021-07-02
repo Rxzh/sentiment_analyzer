@@ -84,14 +84,25 @@ elif os.name =='nt': #windows
 
 
 ```python
-## Convertisseur Date -> Timestamp
 def to_ts(date):
+    """
+    Converts a dd/mm/yy or yy-mm-dd date format to a timestamp
+    ============
+    Input  : str
+    Output : int
+    """
     if '/' in date: #Format dd/mm/yy
         return int(time.mktime(datetime.datetime.strptime(date, "%d/%m/%Y").timetuple()))
     elif '-' in date: #Format yy-mm-dd
         return int(time.mktime(datetime.datetime.strptime(date, "%Y-%m-%d").timetuple()))
 
 def to_date(ts):
+    """
+    Converts a timestamp to a yy-mm-dd format date
+    ============
+    Input  : int
+    Output : str
+    """
     return str(datetime.datetime.fromtimestamp(ts)).split(' ')[0]
 
 min_ = 1621720800
@@ -108,18 +119,17 @@ print(to_date(max_))
 
 ```python
 #Obtenu en runnant le script cryptopanic_scraper.py
-object = pd.read_pickle('data/cryptopanic_hot_Mon Jun 28->Thu Jul 01.pickle')
+obj = pd.read_pickle('data/cryptopanic_hot_Mon Jun 28->Thu Jul 01.pickle')
 ```
 
 
 ```python
-Dates = list()
-Tweets = list()
-for key in object.keys():
+Dates, Tweets = list(), list()
+for key in obj.keys():
  
-    month,day = object[key]['Date'].split(' ')[1:3]
+    month,day = obj[key]['Date'].split(' ')[1:3]
     Dates.append(to_ts("%s/%s/%s"%(day,month.replace('Jun','06').replace('Jul','07'),'2021')))
-    Tweets.append(object[key]['Title'].lower())
+    Tweets.append(obj[key]['Title'].lower())
 
 ```
 
