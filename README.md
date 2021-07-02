@@ -135,7 +135,6 @@ for key in obj.keys():
 
 
 ```python
-tweet = TextBlob("Textblob is amazingly simple to use. What great fun!")
 Subjectivities = [TextBlob(Tweet).sentiment.subjectivity for Tweet in Tweets]
 Polarities = [TextBlob(Tweet).sentiment.polarity for Tweet in Tweets]
 ```
